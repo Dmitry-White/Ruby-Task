@@ -1,15 +1,17 @@
-require 'curb'
 require 'nokogiri'
+require 'curb'
+require 'csv'
 
-http = Curl::Easy.new("http://www.petsonic.com/es/perros/snacks-y-huesos-perro") do |curl|
+url = Curl.get("http://www.petsonic.com/es/perros/snacks-y-huesos-perro") do |curl|
   curl.verbose = true
-  curl.ssl_verify_host = false
+  curl.follow_location = true
+  curl.ssl_verify_peer = false
 end
-http.perform
-puts http.body_str
 
+html = Nokogiri::HTML(url.body_str)
 
+puts html
 
-
-#html = Nokogiri::HTML(http.body_str)
-
+File.open("script_output.html", "w") do |file|
+  file << html
+end
