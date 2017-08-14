@@ -112,9 +112,14 @@ url_list.each do |link|
 
   puts "      Description of product " + product_num.to_s + " added to .csv file."
   product_num += 1
+
+
+  #-------------------- Limit number of links scrapped--------------------
   if product_num == 50
     break
   end
+  #-----------------------------------------------------------------------
+
 end
 puts 'Scraping complete. Refer to ' + ARGV[0] + ' file for script output.'
 #-------------------------------------------------------------------------
